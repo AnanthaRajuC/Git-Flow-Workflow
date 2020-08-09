@@ -1,4 +1,6 @@
-# GIT FLOW WORKFLOW
+# GITFLOW WORKFLOW
+
+Resource: https://nvie.com/posts/a-successful-git-branching-model/
 
 #### clone a remote git repository
 				
@@ -8,7 +10,7 @@
 
 ----------------------------------------------------------------------------------------------------------
 
-#### create develop branch
+#### create **develop** branch - this is the main code-line
 
 1. `git checkout -b develop`
 - create and switch to a branch called **develop**
@@ -19,37 +21,51 @@
 
 ----------------------------------------------------------------------------------------------------------
 
-1. `git checkout -b feature1`
+1. `git checkout -b featureBranch`
+- create and switch to a branch called featureBranch
 
-- add or modify files
+##### add or modify files
 
 `git add .`
 
 `git commit -m "ADD/MODIFY File/s"`
 
-----------------------------------------------------------------------------------------------------------
-
-`git checkout develop`
-
-`git pull`
-
-`git merge feature1`
-
-`git push`
+2. `git push -u origin featureBranch`
+- links local branchName with remote corresponding branch
 
 ----------------------------------------------------------------------------------------------------------
 
-`git checkout master`
+#### integrate featureBranch branch with the main code-line i.e., the **develop** branch
+ 
+1. `git checkout develop`
 
-`git pull`
+2. `git pull`
 
-`git push`
+3. `git merge featureBranch`
+
+4. `git push`
 
 ----------------------------------------------------------------------------------------------------------
 
-`git tag "1.0.0.RELEASE" -m "Releasing version 1.0.0"`
+#### release code from **develop** branch (Normally code is released from a dedicated **release** branch taken from **develop**). In this case assume develop contains valid releaseable code.
 
-`git push --tags`
+1. `git checkout master`
+
+2. `git pull`
+
+3. `git merge develop`
+
+4. `git push`
+
+----------------------------------------------------------------------------------------------------------
+
+#### create a tag representing the release
+
+##### a **tag** is a special branch which can be setup to read only, giving us the certainity to always have a branch we can go back to in-order to reproduce releaseable code
+
+1. `git tag "1.0.0.RELEASE" -m "Releasing version 1.0.0"`
+
+2. `git push --tags`
 
 ----------------------------------------------------------------------------------------------------------
 
